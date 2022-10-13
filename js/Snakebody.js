@@ -1,44 +1,39 @@
-// snake body
-const SNAKE_WIDTH = 40;
-const SNAKE_HEIGHT = 40;
-export default class SnakeBody {
-  constructor(x, y, parent, child) {
-    this.x = x;
-    this.y = y;
-    this.parent = parent;
-    this.child = child;
-    this.pCor = { x: 0, y: 0 };
+export default class Snake {
+  constructor() {
+    this.snakes = [
+      { x: 160, y: 150 },
+      { x: 120, y: 150 },
+      { x: 80, y: 150 },
+      { x: 40, y: 150 },
+    ];
+
+    this.initializeKeyEvents();
   }
 
+  initializeKeyEvents() {
+    window.addEventListener("keydown", (event) => {
+      if (event.key == "ArrowRight") {
+        // console.log(this.snakes);
+        this.updatePos();
+        // console.log(this.snakes);
+        this.snakes[0].x += 40;
+      }
+    });
+  }
+
+  generateFood() {
+    //
+  }
+
+  updatePos() {
+    for (let index = this.snakes.length - 2; index >= 0; index--) {
+      this.snakes[index + 1] = { ...this.snakes[index] };
+    }
+    // console.log(arrCopy);
+  }
   draw(context) {
-    context.fillRect(this.x, this.y, SNAKE_WIDTH, SNAKE_HEIGHT);
-  }
-
-  moveRight(velocity) {
-    this.pCor.x = this.x;
-    this.child.x = this.x;
-    this.x += velocity;
-  }
-
-  moveDown(velocity) {
-    this.pCor.y = this.y;
-    this.y += velocity;
-  }
-
-  moveLeft(velocity) {
-    this.pCor.x = this.x;
-    this.x -= velocity;
-  }
-
-  moveUp(velocity) {
-    this.pCor.y = this.y;
-    this.y -= velocity;
-  }
-
-  changeCor(x, y) {
-    this.pCor.x = this.x;
-    this.pCor.y = this.y;
-    this.x = x;
-    this.y = y;
+    for (const cor of this.snakes) {
+      context.fillRect(cor.x, cor.y, 40, 40);
+    }
   }
 }
