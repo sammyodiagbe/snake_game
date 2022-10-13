@@ -8,6 +8,7 @@ export default class Snake {
     ];
 
     this.initializeKeyEvents();
+    this.generateFood();
   }
 
   initializeKeyEvents() {
@@ -22,7 +23,37 @@ export default class Snake {
   }
 
   generateFood() {
+    const MAX = 761; // 801
+    const MIN = 0;
     // generate food in a random position between the screen and while also keeping into account all location of the snake body
+    let randomXPosition = this.generateRandomNumber(MIN, MAX);
+    let randomYPosition = this.generateRandomNumber(MIN, MAX);
+
+    // create a function that checks to see if the food is in the position of any of the snakes body
+    let inSnakeBody = this.checkFoodPosition(randomXPosition, randomYPosition);
+    while (inSnakeBody) {
+      randomXPosition = this.generateRandomNumber(MIN, MAX);
+      randomYPosition = this.generateRandomNumber(MIN, MAX);
+
+      inSnakeBody = this.checkFoodPosition(randomXPosition, randomYPosition);
+    }
+  }
+
+  generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  checkFoodPosition(positionX, positionY) {
+    for (const coordinate of this.snakes) {
+      const { x: snakeBodyX, y: snakeBodyY } = coordinate;
+      if (
+        (positionX >= snakeBodyX && positionX <= snakeBodyX + 40) ||
+        (positionY >= snakeBodyY && positionY <= positionY + 40)
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   updatePos() {
@@ -35,5 +66,7 @@ export default class Snake {
     for (const cor of this.snakes) {
       context.fillRect(cor.x, cor.y, 40, 40);
     }
+
+    // this.generateFood();
   }
 }
