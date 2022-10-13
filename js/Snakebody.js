@@ -34,17 +34,17 @@ export default class Snake {
         this.movingDirection = 0;
       }
 
-      if (event.key == "ArrowUp" || this.snakes[0].y <= 0) {
+      if (event.key == "ArrowUp") {
         // if the snake is going up already
-        if (this.movingDirection == 3) return;
+        if (this.movingDirection == 3 || this.snakes[0].y < 0) return;
         this.updatePos();
         this.snakes[0].y -= 40;
         this.movingDirection = 2;
       }
 
-      if (event.key == "ArrowDown" || this.snakes[0].y + 40 == 800) {
+      if (event.key == "ArrowDown") {
         // if the snake is going up already then don't allow the snake go down
-        if (this.movingDirection == 2) return;
+        if (this.movingDirection == 2 || this.snakes[0].y + 40 == 800) return;
         this.updatePos();
         this.snakes[0].y += 40;
         this.movingDirection = 3;
