@@ -7,6 +7,8 @@ export default class Snake {
       { x: 40, y: 150 },
     ];
 
+    this.movingDirection = 1;
+
     this.initializeKeyEvents();
     this.generateFood();
   }
@@ -15,9 +17,37 @@ export default class Snake {
     window.addEventListener("keydown", (event) => {
       if (event.key == "ArrowRight") {
         // console.log(this.snakes);
+        // if the snake is going to the left then don't allow it go to the right
+        if (this.movingDirection == 0) return;
         this.updatePos();
         // console.log(this.snakes);
+
         this.snakes[0].x += 40;
+        this.movingDirection = 1;
+      }
+
+      if (event.key == "ArrowLeft") {
+        // if the snk
+        if (this.movingDirection == 1) return;
+        this.updatePos();
+        this.snakes[0].x -= 40;
+        this.movingDirection = 0;
+      }
+
+      if (event.key == "ArrowUp") {
+        // if the snake is going up already
+        if (this.movingDirection == 3) return;
+        this.updatePos();
+        this.snakes[0].y -= 40;
+        this.movingDirection = 2;
+      }
+
+      if (event.key == "ArrowDown") {
+        // if the snake is going up already then don't allow the snake go down
+        if (this.movingDirection == 2) return;
+        this.updatePos();
+        this.snakes[0].y += 40;
+        this.movingDirection = 3;
       }
     });
   }
