@@ -18,7 +18,7 @@ export default class Snake {
       if (event.key == "ArrowRight") {
         // console.log(this.snakes);
         // if the snake is going to the left then don't allow it go to the right
-        if (this.movingDirection == 0) return;
+        if (this.movingDirection == 0 || this.snakes[0].x + 40 == 800) return;
         this.updatePos();
         // console.log(this.snakes);
 
@@ -28,13 +28,13 @@ export default class Snake {
 
       if (event.key == "ArrowLeft") {
         // if the snk
-        if (this.movingDirection == 1) return;
+        if (this.movingDirection == 1 || this.snakes[0].x <= 0) return;
         this.updatePos();
         this.snakes[0].x -= 40;
         this.movingDirection = 0;
       }
 
-      if (event.key == "ArrowUp") {
+      if (event.key == "ArrowUp" || this.snakes[0].y <= 0) {
         // if the snake is going up already
         if (this.movingDirection == 3) return;
         this.updatePos();
@@ -42,7 +42,7 @@ export default class Snake {
         this.movingDirection = 2;
       }
 
-      if (event.key == "ArrowDown") {
+      if (event.key == "ArrowDown" || this.snakes[0].y + 40 == 800) {
         // if the snake is going up already then don't allow the snake go down
         if (this.movingDirection == 2) return;
         this.updatePos();
