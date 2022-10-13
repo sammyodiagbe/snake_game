@@ -17,18 +17,30 @@
         #canvas {
             display: block;
             overflow: hidden;
+            background: #fff;
         }
     
         body {
             font-size: 16px;
+        }
+
+        div.world-container {
             height: 100vh;
-            width: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: lightgreen;
+            overflow: hidden;
         }
     </style>
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
+    <div class="world-container">
+        <canvas id="canvas"></canvas>
+
+    </div>
     
 </body>
 </html>

@@ -22,7 +22,7 @@ export default class Snake {
   }
 
   generateFood() {
-    //
+    // generate food in a random position between the screen and while also keeping into account all location of the snake body
   }
 
   updatePos() {
