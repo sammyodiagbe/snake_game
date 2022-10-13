@@ -10,9 +10,12 @@ canvas.height = WORLD_HEIGHT;
 
 const snake = new Snake();
 
+const foodpos = snake.generateFood();
+
 function draw() {
   context.clearRect(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
   snake.draw(context);
+  context.fillRect(foodpos.randomXPosition, foodpos.randomYPosition, 40, 40);
 }
 
 function update() {

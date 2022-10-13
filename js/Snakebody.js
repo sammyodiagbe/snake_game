@@ -24,7 +24,7 @@ export default class Snake {
 
   generateFood() {
     const MAX = 761; // 801
-    const MIN = 0;
+    const MIN = 40;
     // generate food in a random position between the screen and while also keeping into account all location of the snake body
     let randomXPosition = this.generateRandomNumber(MIN, MAX);
     let randomYPosition = this.generateRandomNumber(MIN, MAX);
@@ -37,6 +37,8 @@ export default class Snake {
 
       inSnakeBody = this.checkFoodPosition(randomXPosition, randomYPosition);
     }
+
+    return { randomXPosition, randomYPosition };
   }
 
   generateRandomNumber(min, max) {
@@ -48,7 +50,7 @@ export default class Snake {
       const { x: snakeBodyX, y: snakeBodyY } = coordinate;
       if (
         (positionX >= snakeBodyX && positionX <= snakeBodyX + 40) ||
-        (positionY >= snakeBodyY && positionY <= positionY + 40)
+        (positionY >= snakeBodyY && positionY <= snakeBodyY + 40)
       ) {
         return true;
       }
